@@ -1,6 +1,10 @@
 // import { nanoid } from 'nanoid';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContactsAPI, addContactAPI, deleteContactAPI } from './operations';
+import {
+  fetchContactsAPI,
+  addContactAPI,
+  deleteContactAPI,
+} from './operations';
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -51,12 +55,15 @@ const contactsSlice = createSlice({
       })
       .addCase(fetchContactsAPI.rejected, (state, action) => {
         state.status = 'failed';
+        state.isLoading = false;
         state.error = action.error.message;
       })
       .addCase(addContactAPI.fulfilled, (state, action) => {
         state.contacts.push(action.payload);
+        state.isLoading = false;
       })
       .addCase(deleteContactAPI.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.contacts = state.contacts.filter(
           contact => contact.id !== action.payload
         );
