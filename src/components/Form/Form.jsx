@@ -4,7 +4,7 @@ import './Form.css';
 import { useState } from 'react';
 //? redux
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlise';
+import { addContact } from 'redux/contactsSlice';
 
 export const Form = () => {
   const dispatch = useDispatch();

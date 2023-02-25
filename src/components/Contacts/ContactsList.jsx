@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 //? redux
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/contactsSlise';
+import { deleteContact } from 'redux/contactsSlice';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
-  const handleDelete = id => {
-    dispatch(deleteContact(id));
-  };
-
+  const handleDelete = id => dispatch(deleteContact(id));
   const filter = useSelector(getFilter);
 
   const filteredContacts = contacts.filter(contact =>
