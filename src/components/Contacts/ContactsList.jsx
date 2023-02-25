@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 //? redux
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/contactsSlice';
+import { useEffect } from 'react';
+import { deleteContact, fetchContacts } from 'redux/operations';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
+  // const status = useSelector(status);
+
+  // update contacts
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleDelete = id => dispatch(deleteContact(id));
   const filter = useSelector(getFilter);
@@ -21,14 +28,14 @@ export const ContactsList = () => {
       <h1>Contacts</h1>
 
       <ul className="Contacts-list">
-        {filteredContacts.map(({ name, id, number }) => {
+        {filteredContacts.map(({ name, id, phone }) => {
           return (
             <li key={id}>
               <div className="contacts__name">
                 <p>{name}</p>
               </div>
               <div className="contacts__number">
-                <p>{number}</p>
+                <p>{phone}</p>
               </div>
               <button
                 type="button"

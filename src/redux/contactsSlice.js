@@ -1,49 +1,35 @@
 import { nanoid } from 'nanoid';
 import { createSlice } from '@reduxjs/toolkit';
-
-const contactsInitialState = [
-  { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
-  { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
-  { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
-  { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
-];
+import { fetchContacts } from './operations';
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
-    items: contactsInitialState,
+    contacts: [],
     isLoading: false,
+    status: 'idle',
     error: null,
   },
   reducers: {
     addContact: {
       reducer(state, action) {
-        state.items.push(action.payload);
+        state.contacts.push(action.payload);
       },
-      prepare(name, number) {
+      prepare(name, phone) {
         return {
           payload: {
             id: nanoid(),
             name,
-            number,
+            phone,
           },
         };
       },
     },
-    prepare(name, number) {
-      return {
-        payload: {
-          id: nanoid(),
-          name,
-          number,
-        },
-      };
-    },
     deleteContact(state, action) {
-      const index = state.items.findIndex(
+      const index = state.contacts.findIndex(
         contact => contact.id === action.payload
       );
-      state.items.splice(index, 1);
+      state.contacts.splice(index, 1);
     },
     setLoading(state, action) {
       state.isLoading = action.payload;
@@ -51,6 +37,22 @@ const contactsSlice = createSlice({
     setError(state, action) {
       state.error = action.payload;
     },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchContacts.pending, state => {
+        state.status = 'idle';
+        state.isLoading = true;
+      })
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.isLoading = false;
+        state.contacts = action.payload;
+      })
+      .addCase(fetchContacts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
   },
 });
 

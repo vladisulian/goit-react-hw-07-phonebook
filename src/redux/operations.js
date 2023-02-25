@@ -1,4 +1,4 @@
-import { TOKEN, URL } from 'API/FetchAPI';
+import { URL } from 'API/FetchAPI';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
