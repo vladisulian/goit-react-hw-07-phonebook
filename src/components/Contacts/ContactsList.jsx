@@ -9,7 +9,6 @@ import { deleteContactAPI, fetchContactsAPI } from 'redux/operations';
 export const ContactsList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
-  // const status = useSelector(status);
 
   // update contacts
   useEffect(() => {
