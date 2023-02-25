@@ -9,7 +9,7 @@ import { addContactAPI } from 'redux/operations';
 export const Form = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setNumber] = useState('');
 
   const handleChange = e => {
     const stateName = e.currentTarget.name;
@@ -20,7 +20,7 @@ export const Form = () => {
         setName(stateValue);
         break;
 
-      case 'number':
+      case 'phone':
         setNumber(stateValue);
         break;
 
@@ -33,11 +33,10 @@ export const Form = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.elements.name.value;
-    const number = form.elements.number.value;
+    const phone = form.elements.phone.value;
+    const contact = { name, phone };
 
-    dispatch(addContactAPI(name, number));
-
-    // onSubmit({ name, number });
+    dispatch(addContactAPI(contact));
 
     reset();
   };
@@ -67,16 +66,16 @@ export const Form = () => {
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="number">
+        <label htmlFor="phone">
           Number <br />
           <input
             type="tel"
-            name="number"
+            name="phone"
             className="Phonebook__form-input"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={number}
+            value={phone}
             onChange={handleChange}
           />
         </label>
@@ -90,6 +89,6 @@ export const Form = () => {
 
 Form.propTypes = {
   name: PropTypes.string,
-  number: PropTypes.string,
+  phone: PropTypes.string,
   onSubmit: PropTypes.func,
 };
