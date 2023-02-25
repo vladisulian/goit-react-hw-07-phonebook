@@ -1,4 +1,9 @@
-import { FetchAPI, PostContact } from 'API/FetchAPI';
+import {
+  DeleteContact,
+  FetchAPI,
+  PostContact,
+  exampleContact,
+} from 'API/FetchAPI';
 import React from 'react';
 import { useEffect } from 'react';
 import { ContactsList } from './Contacts/ContactsList';
@@ -7,7 +12,10 @@ import { Form } from './Form/Form';
 
 export const App = () => {
   useEffect(() => {
+    // console.log(exampleContact);
     FetchAPI();
+    // PostContact(exampleContact);
+    // DeleteContact(3);
   }, []);
 
   return (
