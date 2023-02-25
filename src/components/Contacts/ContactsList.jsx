@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
 import { useEffect } from 'react';
-import { deleteContact, fetchContacts } from 'redux/operations';
+import { deleteContactAPI, fetchContactsAPI } from 'redux/operations';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
@@ -13,10 +13,11 @@ export const ContactsList = () => {
 
   // update contacts
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchContactsAPI());
+    // dispatch in dependency will update contacts-list
   }, [dispatch]);
 
-  const handleDelete = id => dispatch(deleteContact(id));
+  const handleDelete = id => dispatch(deleteContactAPI(id));
   const filter = useSelector(getFilter);
 
   const filteredContacts = contacts.filter(contact =>

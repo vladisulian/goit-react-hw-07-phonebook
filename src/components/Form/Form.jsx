@@ -4,7 +4,7 @@ import './Form.css';
 import { useState } from 'react';
 //? redux
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { addContactAPI } from 'redux/operations';
 
 export const Form = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ export const Form = () => {
     const name = form.elements.name.value;
     const number = form.elements.number.value;
 
-    dispatch(addContact(name, number));
+    dispatch(addContactAPI(name, number));
 
     // onSubmit({ name, number });
 

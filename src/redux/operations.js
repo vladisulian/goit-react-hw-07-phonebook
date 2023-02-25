@@ -2,14 +2,14 @@ import { URL } from 'API/FetchAPI';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
+export const fetchContactsAPI = createAsyncThunk('contacts/fetchAll', async () => {
   const response = await axios.get(URL).catch(error => console.error(error));
   console.log('response.data from fetch(operations)', response.data);
 
   return response.data;
 });
 
-export const addContact = createAsyncThunk(
+export const addContactAPI = createAsyncThunk(
   'contacts/addContact',
   async contact => {
     const response = await axios
@@ -21,7 +21,7 @@ export const addContact = createAsyncThunk(
   }
 );
 
-export const deleteContact = createAsyncThunk(
+export const deleteContactAPI = createAsyncThunk(
   'contacts/deleteContact',
   async contactId => {
     await axios
