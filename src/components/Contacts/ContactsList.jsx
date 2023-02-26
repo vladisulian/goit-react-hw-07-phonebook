@@ -13,14 +13,14 @@ export const ContactsList = () => {
   // update contacts
   useEffect(() => {
     dispatch(fetchContactsAPI());
-    // dispatch in dependency will update contacts-list
+    // dispatch in hook dependency will update contacts-list
   }, [dispatch]);
 
   const handleDelete = id => dispatch(deleteContactAPI(id));
   const filter = useSelector(getFilter);
 
   const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter)
+    contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import './Filter.css';
 //? redux
 import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/filterSlise';
+import { setFilter } from 'redux/filterSlice';
 
 export const FilterBar = () => {
   const dispatch = useDispatch();
